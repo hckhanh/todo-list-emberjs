@@ -1,14 +1,12 @@
 <h1>Todo-list</h1>
 
-<input type="text" placeholder="What do you want to do?"> (Enter to add)
+{{input type="text" placeholder="What do you want to do?" enter="addTodo" value=content}} (Enter to add)
 <ul style="padding-left: 0px;">
-  <li style="list-style-type: none;">
-    <input type="checkbox" id="cbox1" value="first_checkbox"> <label for="cbox1">Make the todo-list app</label>
-  </li>
-  <li style="list-style-type: none;">
-    <input type="checkbox" id="cbox2" value="second_checkbox"> <label for="cbox2">Make Weather application (Ember.js)</label>
-  </li>
-  <li style="list-style-type: none;">
-    <input type="checkbox" id="cbox3" value="third_checkbox"> <label for="cbox3">Make Weather application (Android)</label>
-  </li>
+  {{#each model as |todo|}}
+    <li style="list-style-type: none;" {{action "onTodoChange" todo on="change"}}>
+      {{input type="checkbox" name=todo.content checked=todo.checked}} {{todo.content}}
+    </li>
+  {{/each}}
 </ul>
+<button {{action "addTodo"}}>Click me Now!!!</button>
+<button {{action "getTodo"}}>Click me Again!!!</button>
